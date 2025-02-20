@@ -29,42 +29,62 @@ class SelectEpisodiosActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        println("Hola antes de cargar temporadas")
         cargarTemporadas()
-        val spinner = b.spinnerTemp
+        println("Hola despues de cargar temporadas")
     }
 
     private fun getRetrofit() : Retrofit {
+        println("Hola")
         return Retrofit
             .Builder()
             .baseUrl("https://rickandmortyapi.com/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+        println("Hola retrofit")
     }
 
 
-    private fun cargarTemporadas(){
+    private fun cargarTemporadas() {
+        println("Hola desde cargar temporadas")
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val llamada = getRetrofit()
+                // Llamada para obtener las temporadas de la API
+                println("Hola desde try")
+                val respuesta = getRetrofit()
                     .create(EpisodioService::class.java)
-                    .getTemporadas()
+                    .getTemporadas() // Ahora devuelve un TemporadasResponse
 
-                val cantidadTemp = llamada.size
+                // Verificar si la respuesta contiene elementos
+                if (respuesta.results.isNotEmpty()) {
+                    val cantidadTemp = respuesta.results.size
+                    val cantidad = (1..cantidadTemp).toList()
 
-                val cantidad = (1..cantidadTemp).toList()
+                    // Crear y configurar el ArrayAdapter
+                    val spinnerAdapter = ArrayAdapter(
+                        this@SelectEpisodiosActivity,
+                        android.R.layout.simple_spinner_item,
+                        cantidad
+                    )
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-                val spinnerAdapter = ArrayAdapter(this@SelectEpisodiosActivity,
-                    android.R.layout.simple_spinner_item,
-                    cantidad)
+                    // Establecer el adapter en el Spinner
+                    launch(Dispatchers.Main) {
+                        b.spinnerTemp.adapter = spinnerAdapter
+                    }
 
-                spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                b.spinnerTemp.adapter = spinnerAdapter
-
-            }catch (e: Exception){
+                    println("Temporadas cargadas correctamente")
+                } else {
+                    println("No se recibieron temporadas")
+                }
+            } catch (e: Exception) {
+                // Mostrar error si algo va mal
                 launch(Dispatchers.Main) {
-                    Toast.makeText(this@SelectEpisodiosActivity,
-                        "Error en el spinner",
-                        Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@SelectEpisodiosActivity,
+                        "Error en el spinner: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
