@@ -1,4 +1,4 @@
-package com.marp.apirickymorty
+package com.marp.apirickymorty.view
 
 import android.content.Intent
 import android.os.Bundle

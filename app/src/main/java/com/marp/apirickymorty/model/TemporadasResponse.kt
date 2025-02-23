@@ -1,4 +1,4 @@
-package com.marp.apirickymorty
+package com.marp.apirickymorty.model
 
 data class TemporadasResponse(
     val info: Info,
