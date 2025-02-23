@@ -4,6 +4,7 @@ import com.marp.apirickymorty.model.EpisodiosResponse
 import com.marp.apirickymorty.model.TemporadasResponse
 import com.marp.rickymortyapi.model.EpisodioResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -17,5 +18,4 @@ interface EpisodioService {
 
     @GET("episode")
     suspend fun getEpisodiosPorTemporada(@Query("episode") temporada: String): EpisodiosResponse
-
 }

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.APIRickYMorty"
         tools:targetApi="31">
         <activity
+            android:name=".PersonajesActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.SelectEpisodiosActivity"
             android:exported="false" />
         <activity
