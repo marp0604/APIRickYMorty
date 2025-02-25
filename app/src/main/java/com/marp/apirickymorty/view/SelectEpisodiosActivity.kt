@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.marp.apirickymorty.R
 import com.marp.apirickymorty.view.adapters.EpisodioAdapter
 import com.marp.apirickymorty.databinding.ActivitySelectEpisodiosBinding
 import com.marp.apirickymorty.data.EpisodioService
@@ -44,6 +46,11 @@ class SelectEpisodiosActivity : AppCompatActivity() {
         configurarRecyclerView()
         cargarTemporadas()
         setupSpinnerListener()
+
+        val btnVolver: ImageButton = findViewById(R.id.btnVolver)
+        btnVolver.setOnClickListener {
+            finish()
+        }
     }
 
     /**

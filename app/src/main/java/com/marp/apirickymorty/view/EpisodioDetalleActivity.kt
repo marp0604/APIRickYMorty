@@ -1,9 +1,11 @@
 package com.marp.apirickymorty.view
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.marp.apirickymorty.R
 import com.marp.apirickymorty.data.EpisodioService
 import com.marp.apirickymorty.databinding.ActivityEpisodioDetalleBinding
 import com.marp.apirickymorty.model.Personaje
@@ -39,6 +41,11 @@ class EpisodioDetalleActivity : AppCompatActivity() {
 
         configurarRecyclerView()
         cargarPersonajes()
+
+        val btnVolver: ImageButton = findViewById(R.id.btnVolver)
+        btnVolver.setOnClickListener {
+            finish()
+        }
     }
 
     private fun configurarRecyclerView() {
