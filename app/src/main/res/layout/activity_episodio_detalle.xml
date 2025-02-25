@@ -1,29 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".view.EpisodioDetailActivity">
+
+    <!-- Título del episodio -->
+
+    <!-- Fecha de emisión -->
 
     <TextView
         android:id="@+id/tituloEpisodio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="52dp"
         android:text="Nombre del Episodio"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textColor="#4A90E2"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- RecyclerView para personajes -->
     <TextView
         android:id="@+id/fechaEpisodio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha de emision"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="36dp"
+        android:text="Fecha de emisión"
+        android:textColor="#7D7D7D"
         android:textSize="16sp"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloEpisodio" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPersonajes"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/recycler_background"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fechaEpisodio"
+        app:layout_constraintVertical_bias="1.0" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

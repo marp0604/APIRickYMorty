@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/ivEpisodio"
-        android:layout_width="244dp"
-        android:layout_height="128dp"
+        android:layout_width="432dp"
+        android:layout_height="133dp"
         android:layout_marginStart="83dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="84dp"
@@ -22,8 +22,9 @@
 
     <Spinner
         android:id="@+id/spinnerTemp"
-        android:layout_width="367dp"
-        android:layout_height="32dp"
+        style="@style/CustomSpinnerStyle"
+        android:layout_width="386dp"
+        android:layout_height="41dp"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="14dp"
@@ -34,15 +35,16 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerEpisodios"
-        android:layout_width="412dp"
-        android:layout_height="498dp"
+        android:layout_width="388dp"
+        android:layout_height="493dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/recycler_background"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

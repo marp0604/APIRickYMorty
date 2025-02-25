@@ -1,28 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="16dp"
+    android:background="#F7F7F7"
+    android:layout_margin="8dp"
+    android:clipToPadding="false">
 
+    <!-- Nombre del episodio -->
     <TextView
         android:id="@+id/nombreEpisodio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre del episodio"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#4A90E2"
+        android:layout_marginBottom="8dp"/>
 
+    <!-- Número del episodio -->
     <TextView
         android:id="@+id/numeroEpisodio"
-        android:layout_width="274dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Número del episodio"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="#7D7D7D"
+        android:layout_marginBottom="8dp"/>
 
+    <!-- Fecha de emisión -->
     <TextView
         android:id="@+id/fechaEpisodio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fecha de emisión"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textColor="#7D7D7D"
+        android:layout_marginBottom="12dp"/>
+
 </LinearLayout>
