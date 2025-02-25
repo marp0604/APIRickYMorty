@@ -14,10 +14,10 @@
 
     <TextView
         android:id="@+id/numeroEpisodio"
-        android:layout_width="wrap_content"
+        android:layout_width="274dp"
         android:layout_height="wrap_content"
         android:text="Número del episodio"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/fechaEpisodio"
