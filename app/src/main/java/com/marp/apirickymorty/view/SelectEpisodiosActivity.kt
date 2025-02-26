@@ -87,7 +87,7 @@ class SelectEpisodiosActivity : AppCompatActivity() {
 
     /**
      * Carga las temporadas disponibles desde la API de "Rick and Morty" y las muestra en un Spinner.
-     * Este metodo realiza una solicitud asincrona utilizando corrutinas para obtener la lista de temporadas
+     * Este metodo realiza una solicitud asincronica utilizando corrutinas para obtener la lista de temporadas
      * y actualiza el Spinner con los datos recibidos. Si no se reciben temporadas o ocurre un error, se muestra
      * un mensaje al usuario.
      */
@@ -121,7 +121,7 @@ class SelectEpisodiosActivity : AppCompatActivity() {
 
     /**
      * Configura el listener del Spinner para cargar los episodios de la temporada seleccionada.
-     * Cuando el usuario selecciona una temporada, se llama al metodo `cargarEpisodiosDeTemporada` para obtener
+     * Cuando el usuario selecciona una temporada, se llama al metodo cargarEpisodiosDeTemporada para obtener
      * y mostrar los episodios correspondientes.
      */
     private fun setupSpinnerListener() {
@@ -137,8 +137,8 @@ class SelectEpisodiosActivity : AppCompatActivity() {
 
     /**
      * Carga los episodios de una temporada especifica desde la API de "Rick and Morty" y los muestra en el RecyclerView.
-     * Este metodo realiza una solicitud asincrona utilizando corrutinas para obtener los episodios de la temporada seleccionada
-     * y actualiza el adpter del RecyclerView con los datos recibidos. Si no hay episodios o ocurre un error, se muestra
+     * Este metodo realiza una solicitud asincronica utilizando corrutinas para obtener los episodios de la temporada seleccionada
+     * y actualiza el adapter del RecyclerView con los datos recibidos. Si no hay episodios o ocurre un error, se muestra
      * un mensaje al usuario.
      *
      * @param temporada Numero de la temporada a cargar.

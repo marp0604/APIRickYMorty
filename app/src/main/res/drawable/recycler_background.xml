@@ -2,7 +2,7 @@
     <solid android:color="#FFFFFF"/>
 
     <stroke
-        android:color="#4A90E2"
+        android:color="@color/azul"
     android:width="2dp"/>
 
     <corners android:radius="16dp"/>

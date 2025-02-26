@@ -10,11 +10,13 @@ import com.marp.apirickymorty.model.Episodio
 
 /**
  * Adapter para un RecyclerView que muestra una lista de episodios.
- * Cada elemento de la lista muestra el nombre y la fecha de emision del episodio.
- * Ademas, maneja los clics en los elementos para ejecutar una accion personalizada.
+ * Cada elemento de la lista muestra el nombre, la fecha de emision y el numero del episodio.
+ * Ademas, maneja los clics en los elementos para ejecutar una accion.
  *
  * @param listaEpisodios Lista inicial de episodios.
  * @param onItemClick Funcion que se ejecuta cuando se hace clic en un episodio.
+ *
+ * @author Miguel Angel Ramirez Perez
  */
 class EpisodioAdapter(
     private var listaEpisodios: List<Episodio>,
@@ -23,7 +25,7 @@ class EpisodioAdapter(
 
     /**
      * ViewHolder que representa cada elemento de la lista de episodios.
-     * Contiene referencias a las vistas que muestran el nombre y la fecha del episodio.
+     * Contiene referencias a las vistas que muestran el nombre, la fecha y el numero del episodio.
      *
      * @param view Vista que representa un elemento de la lista.
      */
@@ -62,8 +64,8 @@ class EpisodioAdapter(
     /**
      * Asocia los datos de un episodio en una posicion especifica con un ViewHolder.
      *
-     * @param holder ViewHolder que contendrá los datos.
-     * @param position Posición del episodio en la lista.
+     * @param holder ViewHolder que contendra los datos.
+     * @param position Posicion del episodio en la lista.
      */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listaEpisodios[position], onItemClick)

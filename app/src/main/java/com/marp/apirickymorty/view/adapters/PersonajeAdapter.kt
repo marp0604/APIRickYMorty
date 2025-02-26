@@ -12,33 +12,40 @@ import com.squareup.picasso.Picasso
 
 /**
  * Adapter para un RecyclerView que muestra una lista de personajes.
- * Este adapter se encarga de vincular los datos de los personajes con las vistas
- * en cada elemento de la lista.
+ * Este adapter se encarga de vincular los datos de los personajes con las vistas en cada elemento de la lista.
+ * Ademas, maneja los clics en los elementos para ejecutar una accion.
  *
  * @param listaPersonajes La lista inicial de personajes que se mostrara en el RecyclerView.
+ * @param onItemClick Funcion que se ejecuta cuando se hace clic en un personaje.
+ *
+ * @author Miguel Angel Ramirez Perez
  */
 class PersonajeAdapter(
-    private var listaPersonajes: List<Personaje>
+    private var listaPersonajes: List<Personaje>,
+    private val onItemClick: (Personaje) -> Unit
 ) : RecyclerView.Adapter<PersonajeAdapter.ViewHolder>() {
 
     /**
-     * ViewHolder representa cada elemento de la lista de personajes.
-     * Contiene las referencias a las vistas que se actualizaran con los datos del personaje.
+     * ViewHolder que representa cada elemento de la lista de personajes.
+     * Contiene referencias a las vistas que se actualizaran con los datos del personaje.
      *
      * @param view La vista que representa un elemento de la lista.
+     * @param onItemClick Funcion que se ejecuta cuando se hace clic en un personaje.
      */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View, private val onItemClick: (Personaje) -> Unit) : RecyclerView.ViewHolder(view) {
         private val nombre: TextView = view.findViewById(R.id.nombrePersonaje)
         private val imagen: ImageView = view.findViewById(R.id.imagenPersonaje)
 
         /**
          * Vincula los datos de un personaje con las vistas correspondientes.
+         * Tambien configura un listener para manejar los clics en el elemento.
          *
-         * @param personaje El objeto Personaje que contiene los datos a mostrar.
+         * @param personaje El objeto [Personaje] que contiene los datos a mostrar.
          */
         fun bind(personaje: Personaje) {
             nombre.text = personaje.name
             Picasso.get().load(personaje.image).into(imagen)
+            itemView.setOnClickListener { onItemClick(personaje) }
         }
     }
 
@@ -46,13 +53,12 @@ class PersonajeAdapter(
      * Crea un nuevo ViewHolder inflando el layout de un elemento de la lista.
      *
      * @param parent El ViewGroup al que se añadira la nueva vista.
-     * @param viewType El tipo de vista del nuevo ViewHolder.
      * @return Un nuevo ViewHolder que contiene la vista de un elemento de la lista.
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_personaje, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, onItemClick)
     }
 
     /**
@@ -75,7 +81,7 @@ class PersonajeAdapter(
     /**
      * Actualiza la lista de personajes y notifica al RecyclerView que los datos han cambiado.
      *
-     * @param nuevaLista La nueva lista de personajes que se mostrara en el RecyclerView.
+     * @param nuevaLista La nueva lista de personajes que se mostrará en el RecyclerView.
      */
     fun actualizarLista(nuevaLista: List<Personaje>) {
         listaPersonajes = nuevaLista

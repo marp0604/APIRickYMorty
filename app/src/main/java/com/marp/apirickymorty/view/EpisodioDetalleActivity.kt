@@ -1,5 +1,6 @@
 package com.marp.apirickymorty.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
@@ -20,13 +21,24 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
+/**
+ * Actividad que muestra los detalles de un episodio especifico.
+ * Incluye informacion como el nombre, fecha de emision y una lista de personajes asociados al episodio.
+ *
+ * @author Miguel Angel Ramirez Perez
+ */
 class EpisodioDetalleActivity : AppCompatActivity() {
 
     private lateinit var b: ActivityEpisodioDetalleBinding
     private lateinit var personajeAdapter: PersonajeAdapter
     private var episodioId: Int = 0
 
+    /**
+     * Metodo que se llama cuando la actividad se crea.
+     * Configura la vista, inicializa el RecyclerView, carga los detalles del episodio y configura el boton de volver.
+     *
+     * @param savedInstanceState Estado anterior de la actividad, si lo hay.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityEpisodioDetalleBinding.inflate(layoutInflater)
@@ -48,12 +60,33 @@ class EpisodioDetalleActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Configura el RecyclerView para mostrar la lista de personajes asociados al episodio.
+     * Define un adapter personalizado y un listener para manejar los clics en los personajes.
+     */
     private fun configurarRecyclerView() {
-        personajeAdapter = PersonajeAdapter(emptyList())
+        personajeAdapter = PersonajeAdapter(emptyList()) { personaje ->
+            val intent = Intent(this, PersonajeDetalleActivity::class.java).apply {
+                putExtra("PERSONAJE_ID", personaje.id)
+                putExtra("PERSONAJE_NOMBRE", personaje.name)
+                putExtra("PERSONAJE_IMAGEN", personaje.image)
+                putExtra("PERSONAJE_ESTADO", personaje.status)
+                putExtra("PERSONAJE_ESPECIE", personaje.species)
+                putExtra("PERSONAJE_GENERO", personaje.gender)
+                putExtra("PERSONAJE_ORIGEN", personaje.origin?.name ?: "Desconocido")
+            }
+            startActivity(intent)
+        }
+
         b.recyclerPersonajes.layoutManager = LinearLayoutManager(this)
         b.recyclerPersonajes.adapter = personajeAdapter
     }
 
+    /**
+     * Crea y devuelve una instancia de Retrofit configurada para hacer solicitudes a la API de Rick and Morty.
+     *
+     * @return Instancia de Retrofit.
+     */
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://rickandmortyapi.com/api/")
@@ -61,7 +94,12 @@ class EpisodioDetalleActivity : AppCompatActivity() {
             .build()
     }
 
-
+    /**
+     * Carga los personajes asociados al episodio desde la API de "Rick and Morty" y los muestra en el RecyclerView.
+     * Este metodo realiza una solicitud asincronica utilizando corrutinas para obtener los personajes asociados al episodio seleccionado
+     * y actualiza el adapter del RecyclerView con los datos recibidos. Si no hay personajes o ocurre un error, se muestra
+     * un mensaje al usuario.
+     */
     private fun cargarPersonajes() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -81,13 +119,10 @@ class EpisodioDetalleActivity : AppCompatActivity() {
                     }
                 }
 
-
                 val personajes = listaPersonajes.awaitAll()
 
                 withContext(Dispatchers.Main) {
                     personajeAdapter.actualizarLista(personajes)
-                    personajeAdapter.notifyDataSetChanged()
-
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@EpisodioDetalleActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
